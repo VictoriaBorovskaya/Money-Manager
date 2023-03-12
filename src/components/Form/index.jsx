@@ -1,29 +1,33 @@
 import { useState } from "react"
+import { v4 as uuidv4 } from 'uuid'
+import { format } from "date-fns"
+import { ru } from "date-fns/locale"
 
-const Form = ({addPurchase, purchases}) => {
-    const options = ['Еда', 'Здоровье', 'Одежда', 'Жилье', 'Образование', 'Путешествия', 'Развлечения', 'Транспорт', 'Прочее']
-    const date = new Date().toLocaleString('ru', {day: 'numeric', month: 'long', year: 'numeric'}).slice(0, -3)
+
+const Form = ({setPurchases, purchases, options}) => {
+    const date = format(new Date(), "dd MMMM yyyy", {locale: ru})
 
     const [price, setPrice] = useState('')
     const [category, setCategory] = useState(options[0])
     const [comment, setComment] = useState('')
-
+    
     const handleClick = (event) => {
         event.preventDefault()
-        let maxId = purchases.reduce((max, purchase) => purchase.id > max ? purchase.id : max, 0) 
-        let purchaseId = maxId + 1
         const purchase = {
-            id: purchaseId,
+            id: uuidv4(),
             date,
-            price: (+price).toFixed(2).toLocaleString('ru-RU') + ' ₽',
+            price: new Intl.NumberFormat('ru-RU').format(price) + '.00 ₽',
             category,
             comment
         }
-        console.log(purchase)
         addPurchase(purchase)
         setPrice('')
         setCategory(options[0])
         setComment('')
+    }
+
+    const addPurchase = (newPurchase) => {
+        setPurchases([newPurchase, ...purchases])
     }
 
     return(
@@ -36,7 +40,7 @@ const Form = ({addPurchase, purchases}) => {
                     type='number'
                     required
                     className='h-8 w-1/2 border border-gray-300 shadow rounded-md outline-none px-2 focus:border-sky-500 focus:border-2' 
-                    placeholder='00.00₽'>
+                    placeholder='00.00 ₽'>
                 </input>
                 <select
                     onChange={(event) => setCategory(event.target.value)} 
@@ -59,7 +63,7 @@ const Form = ({addPurchase, purchases}) => {
             </textarea>
             <button 
                 type='submit'
-                className='h-8 m-auto w-1/2 border border-gray-300 bg-sky-500 rounded-md shadow text-lg font-medium text-gray-50'>
+                className='h-8 m-auto w-1/2 border-2 border-gray-50 bg-sky-500 rounded-md text-lg font-medium text-gray-50 hover:bg-gray-50 hover:text-sky-500 hover:border-sky-500 duration-300'>
                     Добавить
             </button>
           </form>

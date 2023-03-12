@@ -1,36 +1,36 @@
-import { useState } from 'react'; 
+import { useState, useEffect } from 'react'; 
 import './App.css';
 import Form from 'components/Form';
 import Purchase from 'components/Purchase';
-
-
+import Months from 'components/Months';
+import Diagram from 'components/Diagram';
 
 function App() {
-  let [purchases, setPurchases] = useState(localStorage.getItem('purchase') ? JSON.parse(localStorage.getItem('purchase')) : [])
+  let [purchases, setPurchases] = useState(localStorage.getItem('purchases') ? JSON.parse(localStorage.getItem('purchases')) : [])
+  const [filteredPurchase, setFilteredPurchase] = useState(purchases)
+  const options = ['Еда', 'Здоровье', 'Одежда', 'Oбразование', 'Жилье', 'Путешествия', 'Развлечения', 'Транспорт', 'Прочее']
 
-  const saveToLocalStorage = (newPurchase) => {
-    setPurchases(newPurchase)
-    localStorage.setItem('purchase', JSON.stringify(newPurchase))
-  }
+  useEffect(() => {
+    localStorage.setItem('purchases', JSON.stringify(purchases))
+  }, [purchases])
 
-  const addPurchase = (newPurchase) => {
-    const purchaseJson = localStorage.getItem('purchase')
-    JSON.parse(purchaseJson)
-    saveToLocalStorage([...purchases, newPurchase])
-  }
+  useEffect(() => {
+    setFilteredPurchase(purchases)
+  }, [purchases])
 
   return (
-   <div>
-      <div className='max-w-2xl m-auto bg-gray-50 min-h-screen shadow-md px-10'>
-          <h1 className='text-3xl text-center font-bold pt-16 pb-10'>Учет расходов</h1>
-          <Form addPurchase={addPurchase} purchases={purchases}/>
-          <div className='flex flex-col pt-24'>
-            {purchases.length > 0 && purchases.map((purchase) => 
-              <Purchase purchases={purchases} purchase={purchase} key={purchase.id} />
-            )}
-          </div>
+    <div className='max-w-2xl m-auto bg-gray-50 min-h-screen shadow-md px-10 py-16'>
+      <h1 className='text-3xl text-center font-bold pb-10'>Учет расходов</h1>
+      <Form setPurchases={setPurchases} purchases={purchases} options={options}/>
+      <Diagram filteredPurchase={filteredPurchase} options={options}/>
+      <div className='flex flex-col py-10'>
+        <Months purchases={purchases} setFilteredPurchase={setFilteredPurchase}/>
+          {filteredPurchase.length === 0 && (<div className='text-center font-semibold text-xl'>Нет внесенных расходов</div>)}
+          {filteredPurchase.length > 0 && filteredPurchase.map((purchase) => 
+            <Purchase purchase={purchase} key={purchase.id} purchases={purchases} setPurchases={setPurchases}/>
+          )}
       </div>
-   </div>
+    </div>
   )
 }
 
