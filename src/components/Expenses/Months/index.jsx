@@ -16,18 +16,18 @@ const Months = ({purchases, setFilteredPurchase}) => {
         if(months[index] === 'За все время') {
             setFilteredPurchase(purchases)
             setDefaultMonth(months[index])
-            setIsOpen(false)
+            setTimeout(() => setIsOpen(false), 500)
         } else {
             const filterArr = purchases.filter(purchase => (purchase.date).replace(/\d/g, "").slice(1, 4) === months[index].toLowerCase().slice(0, 3))
             setFilteredPurchase(filterArr)
             setDefaultMonth(months[index])
-            setIsOpen(false)
+            setTimeout(() => setIsOpen(false), 500)
         }
     }
 
     return(
-        <div className='pb-10 flex justify-end relative'>
-            <div className={isOpen ? "flex flex-col w-1/3 px-2 py-1 border rounded-t-md border-gray-300 border-b-white bg-white" : "bg-white border border-gray-300 rounded-md shadow flex flex-col w-1/3 px-2 py-1"}>
+        <div className='pb-3 pt-5 flex justify-end relative'>
+            <div className={isOpen ? "flex flex-col w-1/3 px-2 py-1 border rounded-t-md border-gray-300 border-b-white bg-white select-month" : "bg-white border border-gray-300 rounded-md shadow flex flex-col w-1/3 px-2 py-1 select-month"}>
                 <div className="flex justify-between">
                     <input value={defaultMonth} disabled className="w-2/3 bg-white"/>
                     <button onClick={openMenu} id="button">
@@ -37,7 +37,7 @@ const Months = ({purchases, setFilteredPurchase}) => {
                     </button>
                 </div>
             </div>
-            <div className={isOpen ? "z-20 absolute top-8 right-0 bg-white w-1/3 border-x border-b border-gray-300 rounded-b-md px-2 animation " : "hidden"}>
+            <div className={isOpen ? "z-20 absolute top-8 right-0 bg-white w-1/3 border-x border-b border-gray-300 rounded-b-md px-2 animation select-month" : "hidden"}>
                 <ul>
                     {months.map((month, index) => {
                         return(

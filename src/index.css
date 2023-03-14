@@ -22,7 +22,6 @@ input[type="radio"]:checked + label {
 }
 
 .modal {
-  border:1px solid #6b7280;
   top: -130px;
 }
 .modal::after {
@@ -30,21 +29,79 @@ input[type="radio"]:checked + label {
   position:absolute; 
   width:0; 
   height:0; 
-  bottom:-14px; 
+  bottom:-15px; 
   right:12px; 
-  border-left: 21px solid transparent;
-  border-right: 21px solid transparent;
-  border-top: 15px solid white;
+  border-left: 22px solid transparent;
+  border-right: 22px solid transparent;
+  border-top: 16px solid #f9fafb;
 }
 
-.modal::before{
-  content:''; 
-  position:absolute; 
-  width:0; 
-  height:0; 
-  bottom:-16px; 
-  right:12px; 
-  border-left: 21px solid transparent;
-  border-right: 21px solid transparent;
-  border-top: 16px solid #6b7280;
+.diagram {
+  width: 200px;
+  height: 200px;
+}
+
+@media(max-width: 580px) {
+  .primary-container {
+    padding: 40px 20px;
+  }
+
+}
+
+@media(max-width: 540px) {
+  .statistic {
+    flex-direction: column;
+    padding-top: 25px;
+  }
+
+  .statistic-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media(max-width: 500px) {
+  .primary-container {
+    padding: 40px 15px;
+  }
+
+  .input-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .select-month {
+    width: 50%;
+  }
+
+  .purchase-price {
+    width: 50%;
+  }
+}
+
+@media(max-width: 425px) {
+  .primary-container {
+    padding: 40px 10px;
+  }
+}
+
+
+@media(max-width: 375px) {
+  .primary-container {
+    padding: 40px 5px;
+  }
+
+  .select-month {
+    width: 70%;
+  }
+
+  .purchase-price {
+    width: 65%;
+  }
+
 }

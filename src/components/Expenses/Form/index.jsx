@@ -31,22 +31,22 @@ const Form = ({setPurchases, purchases, options}) => {
     }
 
     return(
-        <form onSubmit={(event) => handleClick(event)} className='flex flex-col gap-5'>
-            <div className='flex gap-5'>
+        <form onSubmit={(event) => handleClick(event)} className='flex flex-col gap-5 input-container'>
+            <div className='flex gap-5 input-container'>
                 <input 
                     onChange={(event) => setPrice(event.target.value)}
                     value={price}
                     name="price"
                     type='number'
                     required
-                    className='h-8 w-1/2 border border-gray-300 shadow rounded-md outline-none px-2 focus:border-sky-500 focus:border-2' 
+                    className='h-8 w-1/2 border border-gray-300 shadow rounded-md outline-none px-2 focus:border-sky-500 focus:border-2 input' 
                     placeholder='00.00 ₽'>
                 </input>
                 <select
                     onChange={(event) => setCategory(event.target.value)} 
                     value={category}
                     name="category"
-                    className='h-8 text-lg w-1/2 border border-gray-300 shadow rounded-md outline-none px-2 focus:border-sky-500 focus:border-2'>
+                    className='h-8 text-lg w-1/2 border border-gray-300 shadow rounded-md outline-none px-2 focus:border-sky-500 focus:border-2 input'>
                     {options.map(option => {
                         return (
                         <option key={option}>{option}</option>
@@ -63,7 +63,7 @@ const Form = ({setPurchases, purchases, options}) => {
             </textarea>
             <button 
                 type='submit'
-                className='h-8 m-auto w-1/2 border-2 border-gray-50 bg-sky-500 rounded-md text-lg font-medium text-gray-50 hover:bg-gray-50 hover:text-sky-500 hover:border-sky-500 duration-300'>
+                className='h-8 m-auto w-1/2 border-2 border-gray-50 bg-sky-500 rounded-md text-lg font-medium text-gray-50 hover:bg-gray-50 hover:text-sky-500 hover:border-sky-500 duration-300 input'>
                     Добавить
             </button>
           </form>
