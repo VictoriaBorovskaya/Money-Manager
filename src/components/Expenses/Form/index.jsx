@@ -16,7 +16,7 @@ const Form = ({setPurchases, purchases, options}) => {
         const purchase = {
             id: uuidv4(),
             date,
-            price: new Intl.NumberFormat('ru-RU').format(Math.abs(Math.round(price))) + '.00 ₽',
+            price: new Intl.NumberFormat('ru-RU').format(Math.abs(Math.round(price))).trim() + '.00 ₽',
             category,
             comment
         }

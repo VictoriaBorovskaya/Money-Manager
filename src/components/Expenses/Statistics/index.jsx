@@ -1,6 +1,6 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
-const Statistics = ({filteredPurchase, options}) => {
+const Statistics = ({filteredPurchase, options, setIsOpen}) => {
 
     const filterCategories = (i) => {
         const categoryArr = filteredPurchase.filter(purchase => purchase.category === options[i])
@@ -42,7 +42,7 @@ const Statistics = ({filteredPurchase, options}) => {
     }
 
     return(
-        <div className='pt-10'>
+        <div className='pt-10' onClick={(e) => e.target && setIsOpen(false)}>
             <p className='text-center font-medium text-xl'>Статистика расходов</p>
             <div className='flex justify-between items-center statistic'>
                 <div className='diagram'>

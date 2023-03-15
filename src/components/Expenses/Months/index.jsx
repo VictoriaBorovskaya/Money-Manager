@@ -1,12 +1,10 @@
 import { useState } from "react"
 import { getMonth } from 'date-fns'
 
-const Months = ({purchases, setFilteredPurchase}) => {
+const Months = ({purchases, setFilteredPurchase, isOpen, setIsOpen}) => {
     const months = ['За все время', "Январь", 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
     const indexDate = getMonth(new Date()) + 1
     const [defaultMonth, setDefaultMonth] = useState(months[indexDate])
-
-    const [isOpen, setIsOpen] = useState(false)
     
     const openMenu = () => {
         isOpen ? setIsOpen(false) : setIsOpen(true)
@@ -37,7 +35,7 @@ const Months = ({purchases, setFilteredPurchase}) => {
                     </button>
                 </div>
             </div>
-            <div className={isOpen ? "z-20 absolute top-8 right-0 bg-white w-1/3 border-x border-b border-gray-300 rounded-b-md px-2 animation select-month" : "hidden"}>
+            <div className={isOpen ? "z-20 absolute top-6 right-0 bg-white w-1/3 border-x border-b border-gray-300 rounded-b-md px-2 animation select-month" : "hidden"}>
                 <ul>
                     {months.map((month, index) => {
                         return(
