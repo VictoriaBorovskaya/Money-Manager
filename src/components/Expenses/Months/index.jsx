@@ -16,12 +16,12 @@ const Months = ({purchases, setFilteredPurchase}) => {
         if(months[index] === 'За все время') {
             setFilteredPurchase(purchases)
             setDefaultMonth(months[index])
-            setTimeout(() => setIsOpen(false), 500)
+            setIsOpen(false)
         } else {
             const filterArr = purchases.filter(purchase => (purchase.date).replace(/\d/g, "").slice(1, 4) === months[index].toLowerCase().slice(0, 3))
             setFilteredPurchase(filterArr)
             setDefaultMonth(months[index])
-            setTimeout(() => setIsOpen(false), 500)
+            setIsOpen(false)
         }
     }
 

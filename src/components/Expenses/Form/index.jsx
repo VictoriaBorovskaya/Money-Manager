@@ -16,7 +16,7 @@ const Form = ({setPurchases, purchases, options}) => {
         const purchase = {
             id: uuidv4(),
             date,
-            price: new Intl.NumberFormat('ru-RU').format(price) + '.00 ₽',
+            price: new Intl.NumberFormat('ru-RU').format(Math.abs(Math.round(price))) + '.00 ₽',
             category,
             comment
         }
@@ -37,6 +37,7 @@ const Form = ({setPurchases, purchases, options}) => {
                     onChange={(event) => setPrice(event.target.value)}
                     value={price}
                     name="price"
+                    pattern="^[ 0-9]+$"
                     type='number'
                     required
                     className='h-8 w-1/2 border border-gray-300 shadow rounded-md outline-none px-2 focus:border-sky-500 focus:border-2 input' 
@@ -63,7 +64,7 @@ const Form = ({setPurchases, purchases, options}) => {
             </textarea>
             <button 
                 type='submit'
-                className='h-8 m-auto w-1/2 border-2 border-gray-50 bg-sky-500 rounded-md text-lg font-medium text-gray-50 hover:bg-gray-50 hover:text-sky-500 hover:border-sky-500 duration-300 input'>
+                className='h-9 m-auto w-1/2 border-2 border-gray-50 bg-sky-500 rounded-md text-lg font-medium text-gray-50 hover:bg-gray-50 hover:text-sky-500 hover:border-sky-500 duration-300 input'>
                     Добавить
             </button>
           </form>
