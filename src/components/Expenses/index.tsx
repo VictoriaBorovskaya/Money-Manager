@@ -14,7 +14,6 @@ const Expenses = () => {
 
     const [filteredPurchase, setFilteredPurchase] = useState(purchases)
     const options = ["Еда", "Здоровье", "Жилье", "Транспорт", "Досуг", "Прочее"]
-    const [isOpen, setIsOpen] = useState<boolean>(false)
 
     useEffect(() => {
         localStorage.setItem("purchases", JSON.stringify(purchases))
@@ -35,14 +34,11 @@ const Expenses = () => {
             <Statistics
                 filteredPurchase={filteredPurchase}
                 options={options}
-                setIsOpen={setIsOpen}
             />
             <div className="flex flex-col py-10">
                 <Months
                     purchases={purchases}
                     setFilteredPurchase={setFilteredPurchase}
-                    isOpen={isOpen}
-                    setIsOpen={setIsOpen}
                 />
                 <DeleteModal purchases={purchases} setPurchases={setPurchases} />
                 {filteredPurchase.length === 0 && (
@@ -57,7 +53,6 @@ const Expenses = () => {
                             key={purchase.id}
                             purchases={purchases}
                             setPurchases={setPurchases}
-                            setIsOpen={setIsOpen}
                         />
                     ))}
             </div>

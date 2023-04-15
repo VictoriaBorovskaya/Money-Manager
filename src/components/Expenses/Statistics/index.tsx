@@ -4,7 +4,6 @@ import { PurchaseType } from "../Form"
 type Props = {
     filteredPurchase: PurchaseType[],
     options: string[],
-    setIsOpen: (isOpen: boolean) => void
 }
 
 type renderCustomizedLabelType = {
@@ -17,7 +16,7 @@ type renderCustomizedLabelType = {
     index: number;
 }
 
-const Statistics = ({ filteredPurchase, options, setIsOpen }: Props) => {
+const Statistics = ({ filteredPurchase, options }: Props) => {
 
     const filterCategories = (i: number) => {
         const categoryArr = filteredPurchase.filter(
@@ -103,7 +102,7 @@ const Statistics = ({ filteredPurchase, options, setIsOpen }: Props) => {
     }
 
     return (
-        <div className="pt-10" onClick={(e) => e.target && setIsOpen(false)}>
+        <div className="pt-10">
             <p className="text-center font-semibold text-2xl text-gray-800">
                 Статистика расходов
             </p>

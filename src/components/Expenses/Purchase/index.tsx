@@ -4,10 +4,9 @@ type Props = {
     purchases: PurchaseType[],
     purchase: PurchaseType,
     setPurchases: (purchases: PurchaseType[]) => void,
-    setIsOpen: (isOpen: boolean) => void
 }
 
-const Purchase = ({ purchases, purchase, setPurchases, setIsOpen }: Props) => {
+const Purchase = ({ purchases, purchase, setPurchases }: Props) => {
 
     const handleChange = (id: string) => {
         setPurchases(
@@ -24,7 +23,6 @@ const Purchase = ({ purchases, purchase, setPurchases, setIsOpen }: Props) => {
         <div>
             <div
                 className={purchase.isChecked === false ? "flex items-center py-3 border-b-2 border-b-gray-600 px-2" : "flex items-center py-3 border-b-2 border-b-gray-600 px-2 bg-gray-200"}
-                onClick={(e) => e.target && setIsOpen(false)}
             >
                 <div className="flex justify-between items-center w-full">
                     <div className="flex flex-col w-full text-neutral-800">
