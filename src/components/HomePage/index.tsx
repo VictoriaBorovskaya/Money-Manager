@@ -2,6 +2,7 @@ const HomePage = () => {
 
     return (
         <div className="title">Главная страница</div>
+
     )
 }
 
