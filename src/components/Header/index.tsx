@@ -1,7 +1,32 @@
 import { Link } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { changeState } from "components/Scripts"
+import "./Header.css"
 
 const Header = () => {
     const logo = require('.//IconLogo.png')
+
+    let [copyPurchases, setCopyPurchases] = useState(
+        localStorage.getItem("purchases")
+            ? JSON.parse(localStorage.getItem("purchases") || "")
+            : []
+    )
+
+    let [copyIncome, setCopyIncome] = useState(
+        localStorage.getItem("income")
+            ? JSON.parse(localStorage.getItem("income") || "")
+            : []
+    )
+
+    useEffect(() => {
+        localStorage.setItem("income", JSON.stringify(copyIncome))
+        localStorage.setItem("purchases", JSON.stringify(copyPurchases))
+    }, [copyPurchases, copyIncome])
+
+    const changeAllState = () => {
+        changeState(setCopyPurchases, copyPurchases)
+        changeState(setCopyIncome, copyIncome)
+    }
 
     return (
         <header className="bg-sky-300 static max-w-2xl m-auto py-2 shadow-md">
@@ -20,9 +45,24 @@ const Header = () => {
                 </div>
             </div>
             <div className="flex items-center justify-center gap-10 pt-5 pb-2 link-container">
-                <Link to='/' className="border-2 border-neutral-800 rounded-md px-6 py-0.5 text-lg font-bold hover:bg-neutral-800 hover:text-sky-300 duration-300 link">Главная</Link>
-                <Link to="/income" className="border-2 border-neutral-800 rounded-md px-6 py-0.5 text-lg font-bold hover:bg-neutral-800 hover:text-sky-300 duration-300 link">Доходы</Link>
-                <Link to="/expenses" className="border-2 border-neutral-800 rounded-md px-6 py-0.5 text-lg font-bold hover:bg-neutral-800 hover:text-sky-300 duration-300 link">Расходы</Link>
+                <Link
+                    onClick={changeAllState}
+                    to='/'
+                    className="header-link link hover:bg-neutral-800 hover:text-sky-300">
+                    Главная
+                </Link>
+                <Link
+                    onClick={() => changeState(setCopyPurchases, copyPurchases)}
+                    to="/income"
+                    className="header-link link hover:bg-neutral-800 hover:text-sky-300">
+                    Доходы
+                </Link>
+                <Link
+                    onClick={() => changeState(setCopyIncome, copyIncome)}
+                    to="/expenses"
+                    className="header-link link hover:bg-neutral-800 hover:text-sky-300">
+                    Расходы
+                </Link>
             </div>
         </header>
     )

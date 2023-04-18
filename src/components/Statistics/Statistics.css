@@ -1,0 +1,16 @@
+.diagram {
+    width: 200px;
+    height: 200px;
+}
+
+@media (max-width: 540px) {
+    .statistic {
+        flex-direction: column;
+        padding-top: 25px;
+    }
+
+    .statistic-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

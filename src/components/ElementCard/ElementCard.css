@@ -1,0 +1,15 @@
+.card {
+    @apply flex items-center py-3 border-b-2 border-b-gray-600 px-2;
+}
+
+@media (max-width: 500px) {
+    .purchase-price {
+        width: 50%;
+    }
+}
+
+@media (max-width: 375px) {
+    .purchase-price {
+        width: 65%;
+    }
+}

@@ -1,0 +1,16 @@
+.header-link {
+    @apply border-2 border-neutral-800 rounded-md px-6 py-0.5 text-lg font-bold duration-300;
+}
+
+@media (max-width: 500px) {
+    .link-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 375px) {
+    .link-container {
+        padding: 20px 5px 8px 5px;
+    }
+}

@@ -1,0 +1,19 @@
+.months-button {
+    @apply h-9 w-2/5 border-2 border-gray-800 bg-sky-300 rounded-md text-lg font-medium text-neutral-800 duration-300;
+}
+
+.months-select {
+    @apply h-8 w-2/5 text-lg border border-gray-400 shadow rounded-md outline-none px-2;
+}
+
+@media (max-width: 500px) {
+    .select-month {
+        width: 50%;
+    }
+}
+
+@media (max-width: 375px) {
+    .select-month {
+        width: 70%;
+    }
+}

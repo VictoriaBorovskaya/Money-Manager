@@ -1,0 +1,15 @@
+.footer-link {
+    @apply font-medium text-neutral-800 cursor-pointer;
+}
+
+@media (max-width: 540px) {
+    .footer-logo {
+        padding-top: 10px;
+    }
+}
+
+@media (max-width: 425px) {
+    .footer-logo {
+        text-align: start;
+    }
+}

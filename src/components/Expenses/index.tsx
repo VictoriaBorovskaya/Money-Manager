@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
-import Form from "components/Expenses/Form"
-import Purchase from "components/Expenses/Purchase"
-import Months from "components/Expenses/Months"
-import Statistics from "components/Expenses/Statistics"
-import DeleteModal from "./DeleteModal"
+import Form from "components/Form"
+import ElementCard from "components/ElementCard"
+import Months from "components/Months"
+import Statistics from "components/Statistics"
+import DeleteModal from "../DeleteModal"
 
 const Expenses = () => {
     let [purchases, setPurchases] = useState(
@@ -25,22 +25,23 @@ const Expenses = () => {
 
     return (
         <div>
-            <h1 className="text-center font-bold text-2xl text-gray-800 pb-10 min-h-full">Учет расходов</h1>
+            <h1 className="title">Учет расходов</h1>
             <Form
-                setPurchases={setPurchases}
-                purchases={purchases}
+                func={setPurchases}
+                data={purchases}
                 options={options}
             />
             <Statistics
-                filteredPurchase={filteredPurchase}
+                title="Статистика расходов"
+                copyData={filteredPurchase}
                 options={options}
             />
             <div className="flex flex-col py-10">
                 <Months
-                    purchases={purchases}
-                    setFilteredPurchase={setFilteredPurchase}
+                    data={purchases}
+                    func={setFilteredPurchase}
                 />
-                <DeleteModal purchases={purchases} setPurchases={setPurchases} />
+                <DeleteModal data={purchases} func={setPurchases} />
                 {filteredPurchase.length === 0 && (
                     <div className="text-center font-semibold text-xl pt-16 pb-4">
                         Нет внесенных расходов
@@ -48,11 +49,11 @@ const Expenses = () => {
                 )}
                 {filteredPurchase.length > 0 &&
                     filteredPurchase.map((purchase: any) => (
-                        <Purchase
-                            purchase={purchase}
+                        <ElementCard
+                            dataElem={purchase}
                             key={purchase.id}
-                            purchases={purchases}
-                            setPurchases={setPurchases}
+                            data={purchases}
+                            func={setPurchases}
                         />
                     ))}
             </div>

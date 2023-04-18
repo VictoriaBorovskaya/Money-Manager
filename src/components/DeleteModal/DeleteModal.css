@@ -1,0 +1,25 @@
+@media (max-width: 500px) {
+    .modal-button-container {
+        flex-direction: column;
+    }
+
+    .modal-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 425px) {
+    .modal {
+        flex-direction: column;
+    }
+
+    .modal-button-container {
+        flex-direction: row;
+        width: 100%;
+        padding-top: 10px;
+    }
+
+    .modal-button {
+        width: 50%;
+    }
+}

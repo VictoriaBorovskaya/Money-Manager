@@ -1,8 +1,11 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts"
 import { PurchaseType } from "../Form"
+import "./Statistics.css"
+import { COLORS, colorsForClassName } from "components/Scripts"
 
 type Props = {
-    filteredPurchase: PurchaseType[],
+    title: string,
+    copyData: PurchaseType[],
     options: string[],
 }
 
@@ -16,10 +19,10 @@ type renderCustomizedLabelType = {
     index: number;
 }
 
-const Statistics = ({ filteredPurchase, options }: Props) => {
+const Statistics = ({ title, copyData, options }: Props) => {
 
     const filterCategories = (i: number) => {
-        const categoryArr = filteredPurchase.filter(
+        const categoryArr = copyData.filter(
             (purchase: PurchaseType) => purchase.category === options[i]
         )
 
@@ -32,7 +35,7 @@ const Statistics = ({ filteredPurchase, options }: Props) => {
     }
 
     const allCategories = () => {
-        const allCategoryArr = filteredPurchase.map((p) => p.price.split("."))
+        const allCategoryArr = copyData.map((p) => p.price.split("."))
         const AllCategoriesPriceArr = allCategoryArr.map((c) =>
             // @ts-ignore
             Number(c[0].match(/\S/g).join(""))
@@ -52,25 +55,6 @@ const Statistics = ({ filteredPurchase, options }: Props) => {
         { name: options[4], value: filterCategories(4) },
         { name: options[5], value: filterCategories(5) },
         { name: options[6], value: filterCategories(6) }
-    ]
-
-    const COLORS = [
-        "#7dd3fc",
-        "#fed7aa",
-        "#86efac",
-        "#d1d5db",
-        "#c4b5fd",
-        "#fef08a",
-        "#f9a8d4"
-    ]
-    const colorsForClassName = [
-        "bg-sky-300",
-        "bg-orange-200",
-        "bg-green-300",
-        "bg-gray-300",
-        "bg-violet-300",
-        "bg-yellow-200",
-        "bg-pink-300"
     ]
 
     const RADIAN = Math.PI / 180
@@ -104,7 +88,7 @@ const Statistics = ({ filteredPurchase, options }: Props) => {
     return (
         <div className="pt-10">
             <p className="text-center font-semibold text-2xl text-gray-800">
-                Статистика расходов
+                {title}
             </p>
             <div className="flex justify-between items-center statistic">
                 <div className="diagram">

@@ -6,140 +6,22 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.animation {
-    opacity: 0;
-    animation: ani 0.5s forwards;
-}
-
-@keyframes ani {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-input[type="radio"]:checked+label {
-    font-weight: 500;
-    background-color: #bae6fd;
-}
-
-.diagram {
-    width: 200px;
-    height: 200px;
-}
-
-
-@media (max-width: 580px) {
-    .primary-container {
-        padding: 40px 20px;
-    }
-}
-
-@media (max-width: 540px) {
-    .statistic {
-        flex-direction: column;
-        padding-top: 25px;
-    }
-
-    .statistic-list {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .footer-link {
-        padding-top: 10px;
-    }
+.title {
+    @apply text-center font-bold text-2xl text-gray-800 pb-10 min-h-full;
 }
 
 @media (max-width: 500px) {
-    .primary-container {
-        padding: 40px 15px;
-    }
-
-    .input-container {
-        flex-direction: column;
-        gap: 10px;
-    }
-
     .input {
         width: 100%;
-    }
-
-    .select-month {
-        width: 50%;
-    }
-
-    .purchase-price {
-        width: 50%;
-    }
-
-    .link-container {
-        flex-direction: column;
-        gap: 15px;
     }
 
     .link {
         width: 60%;
         text-align: center;
     }
-
-    .modal-button-container {
-        flex-direction: column;
-    }
-
-    .modal-button {
-        width: 100%;
-    }
-}
-
-@media (max-width: 425px) {
-    .primary-container {
-        padding: 40px 10px;
-    }
-
-    .modal {
-        flex-direction: column;
-    }
-
-    .modal-button-container {
-        flex-direction: row;
-        width: 100%;
-        padding-top: 10px;
-    }
-
-    .modal-button {
-        width: 50%;
-    }
-
-    .footer-link {
-        text-align: start;
-    }
 }
 
 @media (max-width: 375px) {
-    .primary-container {
-        padding: 40px 5px;
-    }
-
-    .select-month {
-        width: 70%;
-    }
-
-    .purchase-price {
-        width: 65%;
-    }
-
-    .modal {
-        right: -30px;
-    }
-
-    .link-container {
-        padding: 20px 5px 8px 5px;
-    }
-
     .link {
         width: 100%;
     }
