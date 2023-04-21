@@ -43,6 +43,7 @@ const HomePage = () => {
             setIsOpen(true)
             // @ts-ignore
             setBudget(Number(getAmount(copyIncome).split('.')[0].match(/\S/g).join("")))
+            localStorage.setItem("budget", JSON.stringify(budget))
         }
     }
 
