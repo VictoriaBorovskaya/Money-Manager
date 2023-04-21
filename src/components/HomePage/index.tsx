@@ -5,7 +5,7 @@ import { useState, FormEvent } from "react"
 import "./HomePage.css"
 
 const HomePage = () => {
-    const image = require("./transfer-money.png")
+    const image = require(".//transfer-money.png")
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [isActive, setIsActive] = useState<boolean>(false)
 
@@ -51,7 +51,7 @@ const HomePage = () => {
             <div className="title">Главная страница</div>
             <div className="grid grid-cols-3 justify-items-center items-center gap-4 text-center statistic-info py-5">
                 <p className="text-lg">Всего поступлений в текущем месяце - <span className="font-medium">{getAmount(copyIncome)}</span></p>
-                <img src={image} className="w-16 h-16 home-icon" />
+                <img src={image} alt="" className="w-16 h-16 home-icon" />
                 <p className="text-lg">Всего списаний в текущем месяцe - <span className="font-medium">{getAmount(copyPurchases)}</span></p>
             </div>
             <div className="flex flex-col py-12">
