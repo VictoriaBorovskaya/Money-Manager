@@ -1,6 +1,6 @@
 import { PurchaseType } from "components/Form"
 
-// для переключения между состояниями isChecked (DeleteModal, Header)
+// для переключения между состояниями isChecked (DeleteModal)
 export const changeState = (func: (array: PurchaseType[]) => void, array: PurchaseType[]) => {
     func(
         array.map((purchase: PurchaseType) => {
@@ -61,3 +61,17 @@ export const colorsForClassName = [
     "bg-yellow-200",
     "bg-pink-300"
 ]
+
+// функция для вычиления итоговой суммы доходов/расходов(Statistic/HomePage) 
+export const getAmount = (data: PurchaseType[]) => {
+    const allCategoryArr = data.map((elem: PurchaseType) => elem.price.split("."))
+    const AllCategoriesPriceArr = allCategoryArr.map((elem) =>
+        // @ts-ignore
+        Number(elem[0].match(/\S/g).join(""))
+    )
+    return (
+        AllCategoriesPriceArr.reduce((a: number, b: number) => a + b, 0).toLocaleString(
+            "ru-RU"
+        ) + ".00 ₽"
+    )
+}

@@ -1,42 +1,15 @@
 import { Link } from "react-router-dom"
-import { useState, useEffect } from "react"
-import { changeState } from "components/Scripts"
 import "./Header.css"
 
 const Header = () => {
-    const logo = require('.//IconLogo.png')
-
-    let [copyPurchases, setCopyPurchases] = useState(
-        localStorage.getItem("purchases")
-            ? JSON.parse(localStorage.getItem("purchases") || "")
-            : []
-    )
-
-    let [copyIncome, setCopyIncome] = useState(
-        localStorage.getItem("income")
-            ? JSON.parse(localStorage.getItem("income") || "")
-            : []
-    )
-
-    useEffect(() => {
-        localStorage.setItem("income", JSON.stringify(copyIncome))
-        localStorage.setItem("purchases", JSON.stringify(copyPurchases))
-    }, [copyPurchases, copyIncome])
-
-    const changeAllState = () => {
-        changeState(setCopyPurchases, copyPurchases)
-        changeState(setCopyIncome, copyIncome)
-    }
+    const icon = require('.//headerLogo.png')
 
     return (
         <header className="bg-sky-300 static max-w-2xl m-auto py-2 shadow-md">
             <div className="flex items-center justify-between px-3">
-                <div className="flex items-center relative">
-                    <img src={logo} alt="logo" className="h-16 w-16 ml-1" />
-                    <p className="text-sky-300 text-3xl font-bold absolute left-5 top-4 pl-0.5">Тя</p>
-                    <p className="text-3xl text-center font-bold text-neutral-800 absolute bottom-3 left-16 pt-0.5">
-                        желовато
-                    </p>
+                <div className="flex items-center relative gap-1">
+                    <img src={icon} alt="logo" className="h-9 w-9" />
+                    <p className="text-3xl font-semibold pl-1 border-l-4 border-l-neutral-800">Тяжеловато</p>
                 </div>
                 <div className="flex">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-neutral-800 mr-1 mt-2 cursor-pointer">
@@ -46,19 +19,16 @@ const Header = () => {
             </div>
             <div className="flex items-center justify-center gap-10 pt-5 pb-2 link-container">
                 <Link
-                    onClick={changeAllState}
                     to='/'
                     className="header-link link hover:bg-neutral-800 hover:text-sky-300">
                     Главная
                 </Link>
                 <Link
-                    onClick={() => changeState(setCopyPurchases, copyPurchases)}
                     to="/income"
                     className="header-link link hover:bg-neutral-800 hover:text-sky-300">
                     Доходы
                 </Link>
                 <Link
-                    onClick={() => changeState(setCopyIncome, copyIncome)}
                     to="/expenses"
                     className="header-link link hover:bg-neutral-800 hover:text-sky-300">
                     Расходы

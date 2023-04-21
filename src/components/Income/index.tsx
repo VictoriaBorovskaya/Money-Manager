@@ -4,6 +4,8 @@ import Months from "components/Months"
 import Statistics from "components/Statistics"
 import ElementCard from "components/ElementCard"
 import DeleteModal from "components/DeleteModal"
+import { months } from "components/Scripts"
+import { getMonth } from "date-fns"
 
 const Income = () => {
     let [income, setIncome] = useState(localStorage.getItem("income")
@@ -12,6 +14,14 @@ const Income = () => {
 
     const [filteredIncome, setFilteredIncome] = useState(income)
     const options = ["Зарплата", "Премия", "Инвестиции", "Переводы", "Внесение наличных", "Прочее"]
+
+    const indexDate = getMonth(new Date()) + 1
+    const currentMonth = months[indexDate]
+    const [defaultMonth, setDefaultMonth] = useState(currentMonth)
+
+    useEffect(() => {
+        setDefaultMonth(currentMonth)
+    }, [income, currentMonth])
 
     useEffect(() => {
         localStorage.setItem("income", JSON.stringify(income))
@@ -37,8 +47,10 @@ const Income = () => {
                 <Months
                     data={income}
                     func={setFilteredIncome}
+                    defaultMonth={defaultMonth}
+                    setDefaultMonth={setDefaultMonth}
                 />
-                <DeleteModal data={income} func={setIncome} />
+                <DeleteModal data={income} func={setIncome} defaultMonth={defaultMonth} />
                 {filteredIncome.length === 0 && (
                     <div className="text-center font-semibold text-xl pt-16 pb-4">
                         Нет внесенных доходов

@@ -7,9 +7,10 @@ import "./DeleteModal.css"
 type Props = {
     data: PurchaseType[];
     func: (data: PurchaseType[]) => void,
+    defaultMonth: string
 }
 
-const DeleteModal = ({ data, func }: Props) => {
+const DeleteModal = ({ data, func, defaultMonth }: Props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const filteredDataCount = data.filter(
         (elem: PurchaseType) => elem.isChecked === true
@@ -42,13 +43,45 @@ const DeleteModal = ({ data, func }: Props) => {
         }
     }, [setIsOpen, filteredDataCount])
 
+    // const selectAllElement = () => {
+    //     func(
+    //         data.map((elem) => {
+    //             if (elem.date.replace(/\d/g, "").slice(1, 4) ===
+    //                 defaultMonth.toLowerCase().slice(0, 3))
+    //                 return { ...elem, isChecked: true }
+    //             else {
+    //                 return { ...elem, isChecked: false }
+    //             }
+    //         })
+    //     )
+    // }
+
+    const selectAllElement = () => {
+        const filterArr = data.filter(
+            (elem) =>
+                elem.date.replace(/\d/g, "").slice(1, 4) ===
+                defaultMonth.toLowerCase().slice(0, 3)
+        )
+        func(
+            filterArr.map((elem) => {
+                return { ...elem, isChecked: true }
+            })
+        )
+    }
+
     return (
         <div className={!isOpen ? "hidden" : "bg-sky-300 flex justify-between items-center py-2 px-2 rounded-md shadow my-5 modal"}>
-            <p className="font-semibold">{form === "one" ?
+            <p className="font-semibold modal-text">{form === "one" ?
                 `Выбран ${filteredDataCount} элемент`
                 : form === "few" ? `Выбранo ${filteredDataCount} элемента`
                     : `Выбранo ${filteredDataCount} элементов`}</p>
             <div className="flex gap-2 modal-button-container">
+                <button
+                    onClick={() => selectAllElement()}
+                    className="border-2 border-neutral-800 rounded-md px-3 py-0.5 font-medium hover:bg-neutral-800 hover:text-sky-300 duration-300 link modal-button"
+                >
+                    Выбрать все
+                </button>
                 <button
                     className="border-2 border-neutral-800 rounded-md px-5 py-1 font-medium hover:bg-neutral-800 hover:text-sky-300 duration-300 link modal-button"
                     onClick={deleteElement}>
@@ -60,7 +93,7 @@ const DeleteModal = ({ data, func }: Props) => {
                     Отмена
                 </button>
             </div>
-        </div>
+        </div >
     )
 }
 

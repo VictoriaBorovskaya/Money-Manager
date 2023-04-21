@@ -22,4 +22,14 @@
     .modal-button {
         width: 50%;
     }
+
+    .modal-text {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 375px) {
+    .modal-button {
+        padding: 3px 6px 3px 6px;
+    }
 }

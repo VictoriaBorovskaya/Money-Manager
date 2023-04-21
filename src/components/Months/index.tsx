@@ -1,18 +1,17 @@
-import { useState, FormEvent, useEffect } from "react"
-import { getMonth } from "date-fns"
+import { FormEvent } from "react"
 import { PurchaseType } from "../Form"
 import "./Months.css"
 import { months } from "components/Scripts"
 
+
 type Props = {
     data: PurchaseType[];
     func: (data: PurchaseType[]) => void;
+    defaultMonth: string;
+    setDefaultMonth: (defaultMonth: string) => void;
 }
 
-const Months = ({ data, func }: Props) => {
-    const indexDate = getMonth(new Date()) + 1
-    const currentMonth = months[indexDate]
-    const [defaultMonth, setDefaultMonth] = useState(months[indexDate])
+const Months = ({ data, func, defaultMonth, setDefaultMonth }: Props) => {
 
     const filter = (event: FormEvent) => {
         event.preventDefault()
@@ -27,10 +26,6 @@ const Months = ({ data, func }: Props) => {
             func(filterArr)
         }
     }
-
-    useEffect(() => {
-        setDefaultMonth(currentMonth)
-    }, [data, currentMonth])
 
     return (
         <form

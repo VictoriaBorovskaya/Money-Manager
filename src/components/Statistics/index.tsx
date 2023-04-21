@@ -1,7 +1,7 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts"
 import { PurchaseType } from "../Form"
 import "./Statistics.css"
-import { COLORS, colorsForClassName } from "components/Scripts"
+import { COLORS, colorsForClassName, getAmount } from "components/Scripts"
 
 type Props = {
     title: string,
@@ -25,26 +25,12 @@ const Statistics = ({ title, copyData, options }: Props) => {
         const categoryArr = copyData.filter(
             (purchase: PurchaseType) => purchase.category === options[i]
         )
-
         const categoriesPriceArr = categoryArr.map((c) => c.price.split("."))
         let result = categoriesPriceArr.map((c) =>
             // @ts-ignore
             Number(c[0].match(/\S/g).join(""))
         )
         return result.reduce((a, b) => a + b, 0)
-    }
-
-    const allCategories = () => {
-        const allCategoryArr = copyData.map((p) => p.price.split("."))
-        const AllCategoriesPriceArr = allCategoryArr.map((c) =>
-            // @ts-ignore
-            Number(c[0].match(/\S/g).join(""))
-        )
-        return (
-            AllCategoriesPriceArr.reduce((a, b) => a + b, 0).toLocaleString(
-                "ru-RU"
-            ) + ".00 ₽"
-        )
     }
 
     const data = [
@@ -135,7 +121,7 @@ const Statistics = ({ title, copyData, options }: Props) => {
                         })}
                     </ul>
                     <p className="font-medium text-center text-lg">
-                        Итого - {allCategories()}
+                        Итого - {getAmount(copyData)}
                     </p>
                 </div>
             </div>

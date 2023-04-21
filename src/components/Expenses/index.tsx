@@ -4,6 +4,8 @@ import ElementCard from "components/ElementCard"
 import Months from "components/Months"
 import Statistics from "components/Statistics"
 import DeleteModal from "../DeleteModal"
+import { months } from "components/Scripts"
+import { getMonth } from "date-fns"
 
 const Expenses = () => {
     let [purchases, setPurchases] = useState(
@@ -14,6 +16,14 @@ const Expenses = () => {
 
     const [filteredPurchase, setFilteredPurchase] = useState(purchases)
     const options = ["Еда", "Здоровье", "Жилье", "Транспорт", "Досуг", "Прочее"]
+
+    const indexDate = getMonth(new Date()) + 1
+    const currentMonth = months[indexDate]
+    const [defaultMonth, setDefaultMonth] = useState(currentMonth)
+
+    useEffect(() => {
+        setDefaultMonth(currentMonth)
+    }, [purchases, currentMonth])
 
     useEffect(() => {
         localStorage.setItem("purchases", JSON.stringify(purchases))
@@ -40,8 +50,10 @@ const Expenses = () => {
                 <Months
                     data={purchases}
                     func={setFilteredPurchase}
+                    defaultMonth={defaultMonth}
+                    setDefaultMonth={setDefaultMonth}
                 />
-                <DeleteModal data={purchases} func={setPurchases} />
+                <DeleteModal data={purchases} func={setPurchases} defaultMonth={defaultMonth} />
                 {filteredPurchase.length === 0 && (
                     <div className="text-center font-semibold text-xl pt-16 pb-4">
                         Нет внесенных расходов
