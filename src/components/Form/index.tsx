@@ -23,7 +23,7 @@ const Form = ({ func, data, options }: Props) => {
     const date = format(new Date(), "dd MMMM yyyy", { locale: ru })
 
     const [price, setPrice] = useState("")
-    const [category, setCategory] = useState("Еда")
+    const [category, setCategory] = useState(options[0])
     const [comment, setComment] = useState("")
 
     const handleClick = (event: FormEvent) => {
