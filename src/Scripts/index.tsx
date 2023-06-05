@@ -1,7 +1,10 @@
 import { PurchaseType } from "components/Form"
 
 // для переключения между состояниями isChecked (DeleteModal)
-export const changeState = (func: (array: PurchaseType[]) => void, array: PurchaseType[]) => {
+export const changeState = (
+    func: (array: PurchaseType[]) => void,
+    array: PurchaseType[]
+) => {
     func(
         array.map((purchase: PurchaseType) => {
             if (purchase.isChecked === true) {
@@ -19,7 +22,11 @@ export function resolvePluralForm(count: number) {
     const lastNumbers = count % 100
 
     if (lastNumber === 1 && lastNumbers !== 11) return "one"
-    if (lastNumber > 1 && lastNumbers < 5 && (lastNumbers < 10 || lastNumbers > 20)) {
+    if (
+        lastNumber > 1 &&
+        lastNumbers < 5 &&
+        (lastNumbers < 10 || lastNumbers > 20)
+    ) {
         return "few"
     }
     return "many"
@@ -42,7 +49,7 @@ export const months = [
     "Декабрь"
 ]
 
-// цвета для статистики 
+// цвета для статистики
 export const COLORS = [
     "#7dd3fc",
     "#fed7aa",
@@ -62,16 +69,19 @@ export const colorsForClassName = [
     "bg-pink-300"
 ]
 
-// функция для вычиления итоговой суммы доходов/расходов(Statistic/HomePage) 
+// функция для вычиления итоговой суммы доходов/расходов(Statistic/HomePage)
 export const getAmount = (data: PurchaseType[]) => {
-    const allCategoryArr = data.map((elem: PurchaseType) => elem.price.split("."))
+    const allCategoryArr = data.map((elem: PurchaseType) =>
+        elem.price.split(".")
+    )
     const AllCategoriesPriceArr = allCategoryArr.map((elem) =>
         // @ts-ignore
         Number(elem[0].match(/\S/g).join(""))
     )
     return (
-        AllCategoriesPriceArr.reduce((a: number, b: number) => a + b, 0).toLocaleString(
-            "ru-RU"
-        ) + ".00 ₽"
+        AllCategoriesPriceArr.reduce(
+            (a: number, b: number) => a + b,
+            0
+        ).toLocaleString("ru-RU") + ".00 ₽"
     )
 }

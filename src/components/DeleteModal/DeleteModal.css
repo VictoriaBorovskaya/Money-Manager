@@ -1,3 +1,7 @@
+.deletemodal-button {
+    @apply border-2 border-neutral-800 rounded-md font-medium hover:bg-neutral-800 hover:text-sky-300 duration-300;
+}
+
 @media (max-width: 500px) {
     .modal-button-container {
         flex-direction: column;

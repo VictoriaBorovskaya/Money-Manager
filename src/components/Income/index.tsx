@@ -4,16 +4,25 @@ import Months from "components/Months"
 import Statistics from "components/Statistics"
 import ElementCard from "components/ElementCard"
 import DeleteModal from "components/DeleteModal"
-import { months } from "components/Scripts"
+import { months } from "Scripts"
 import { getMonth } from "date-fns"
 
 const Income = () => {
-    let [income, setIncome] = useState(localStorage.getItem("income")
-        ? JSON.parse(localStorage.getItem("income") || "")
-        : [])
+    let [income, setIncome] = useState(
+        localStorage.getItem("income")
+            ? JSON.parse(localStorage.getItem("income") || "")
+            : []
+    )
 
     const [filteredIncome, setFilteredIncome] = useState(income)
-    const options = ["Зарплата", "Премия", "Инвестиции", "Переводы", "Внесение наличных", "Прочее"]
+    const options = [
+        "Зарплата",
+        "Премия",
+        "Инвестиции",
+        "Переводы",
+        "Внесение наличных",
+        "Прочее"
+    ]
 
     const indexDate = getMonth(new Date()) + 1
     const currentMonth = months[indexDate]
@@ -34,10 +43,7 @@ const Income = () => {
     return (
         <div>
             <h1 className="title">Учет доходов</h1>
-            <Form
-                func={setIncome}
-                data={income}
-                options={options} />
+            <Form func={setIncome} data={income} options={options} />
             <Statistics
                 title="Статистика доходов"
                 copyData={filteredIncome}
@@ -50,24 +56,30 @@ const Income = () => {
                     defaultMonth={defaultMonth}
                     setDefaultMonth={setDefaultMonth}
                 />
-                <DeleteModal data={income} func={setIncome} defaultMonth={defaultMonth} />
+                <DeleteModal
+                    data={income}
+                    func={setIncome}
+                    defaultMonth={defaultMonth}
+                />
                 {filteredIncome.length === 0 && (
                     <div className="text-center font-semibold text-xl pt-16 pb-4">
                         Нет внесенных доходов
                     </div>
                 )}
-                {filteredIncome.length > 0 &&
-                    filteredIncome.map((item: any) => (
-                        <ElementCard
-                            dataElem={item}
-                            key={item.id}
-                            data={income}
-                            func={setIncome}
-                        />
-                    ))}
+                {filteredIncome.length > 0 && (
+                    <div className="rounded-t-md overflow-hidden">
+                        {filteredIncome.map((item: any) => (
+                            <ElementCard
+                                dataElem={item}
+                                key={item.id}
+                                data={income}
+                                func={setIncome}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
-
     )
 }
 

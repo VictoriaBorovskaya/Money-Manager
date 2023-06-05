@@ -1,5 +1,5 @@
 .footer-link {
-    @apply font-medium text-neutral-800 cursor-pointer;
+    @apply font-medium text-neutral-800 cursor-pointer hover:underline;
 }
 
 @media (max-width: 540px) {

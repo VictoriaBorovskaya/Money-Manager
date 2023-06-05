@@ -4,7 +4,7 @@ import ElementCard from "components/ElementCard"
 import Months from "components/Months"
 import Statistics from "components/Statistics"
 import DeleteModal from "../DeleteModal"
-import { months } from "components/Scripts"
+import { months } from "Scripts"
 import { getMonth } from "date-fns"
 
 const Expenses = () => {
@@ -36,11 +36,7 @@ const Expenses = () => {
     return (
         <div>
             <h1 className="title">Учет расходов</h1>
-            <Form
-                func={setPurchases}
-                data={purchases}
-                options={options}
-            />
+            <Form func={setPurchases} data={purchases} options={options} />
             <Statistics
                 title="Статистика расходов"
                 copyData={filteredPurchase}
@@ -53,21 +49,28 @@ const Expenses = () => {
                     defaultMonth={defaultMonth}
                     setDefaultMonth={setDefaultMonth}
                 />
-                <DeleteModal data={purchases} func={setPurchases} defaultMonth={defaultMonth} />
+                <DeleteModal
+                    data={purchases}
+                    func={setPurchases}
+                    defaultMonth={defaultMonth}
+                />
                 {filteredPurchase.length === 0 && (
                     <div className="text-center font-semibold text-xl pt-16 pb-4">
                         Нет внесенных расходов
                     </div>
                 )}
-                {filteredPurchase.length > 0 &&
-                    filteredPurchase.map((purchase: any) => (
-                        <ElementCard
-                            dataElem={purchase}
-                            key={purchase.id}
-                            data={purchases}
-                            func={setPurchases}
-                        />
-                    ))}
+                {filteredPurchase.length > 0 && (
+                    <div className="rounded-t-md overflow-hidden">
+                        {filteredPurchase.map((purchase: any) => (
+                            <ElementCard
+                                dataElem={purchase}
+                                key={purchase.id}
+                                data={purchases}
+                                func={setPurchases}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     )

@@ -1,26 +1,25 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts"
 import { PurchaseType } from "../Form"
 import "./Statistics.css"
-import { COLORS, colorsForClassName, getAmount } from "components/Scripts"
+import { COLORS, colorsForClassName, getAmount } from "Scripts"
 
 type Props = {
-    title: string,
-    copyData: PurchaseType[],
-    options: string[],
+    title: string
+    copyData: PurchaseType[]
+    options: string[]
 }
 
 type renderCustomizedLabelType = {
-    cx: number;
-    cy: number;
-    midAngle: number;
-    innerRadius: number;
-    outerRadius: number;
-    percent: number;
-    index: number;
+    cx: number
+    cy: number
+    midAngle: number
+    innerRadius: number
+    outerRadius: number
+    percent: number
+    index: number
 }
 
 const Statistics = ({ title, copyData, options }: Props) => {
-
     const filterCategories = (i: number) => {
         const categoryArr = copyData.filter(
             (purchase: PurchaseType) => purchase.category === options[i]
@@ -111,7 +110,7 @@ const Statistics = ({ title, copyData, options }: Props) => {
                                     }
                                     key={option}
                                 >
-                                    {option} - {" "}
+                                    {option} -{" "}
                                     {filterCategories(index).toLocaleString(
                                         "ru-RU"
                                     )}

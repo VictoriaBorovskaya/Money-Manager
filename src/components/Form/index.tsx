@@ -1,21 +1,21 @@
 import { useState, FormEvent } from "react"
 import { format } from "date-fns"
 import { ru } from "date-fns/locale"
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid"
 import "./Form.css"
 
 export type PurchaseType = {
-    id: string;
-    date: string;
-    price: string;
-    category: string;
-    comment: string;
-    isChecked: boolean;
+    id: string
+    date: string
+    price: string
+    category: string
+    comment: string
+    isChecked: boolean
 }
 
 type Props = {
-    func: (data: PurchaseType[]) => void,
-    data: PurchaseType[],
+    func: (data: PurchaseType[]) => void
+    data: PurchaseType[]
     options: string[]
 }
 
@@ -32,8 +32,9 @@ const Form = ({ func, data, options }: Props) => {
             id: uuidv4(),
             date,
             price:
-                new Intl.NumberFormat("ru-RU")
-                    .format(Math.abs(Math.round(+price))) + ".00 ₽",
+                new Intl.NumberFormat("ru-RU").format(
+                    Math.abs(Math.round(+price))
+                ) + ".00 ₽",
             category,
             comment,
             isChecked: false
@@ -42,7 +43,6 @@ const Form = ({ func, data, options }: Props) => {
         setPrice("")
         setCategory(options[0])
         setComment("")
-
     }
 
     const addElement = (newElem: PurchaseType) => {
@@ -62,14 +62,14 @@ const Form = ({ func, data, options }: Props) => {
                     pattern="^[ 0-9]+$"
                     type="number"
                     required
-                    className="h-8 w-1/2 focus:border-sky-400 focus:border-2 input-form input"
+                    className="h-8 w-1/2 input-form input"
                     placeholder="00.00 ₽"
                 ></input>
                 <select
                     onChange={(event) => setCategory(event.target.value)}
                     value={category}
                     name="category"
-                    className="h-8 w-1/2 text-lg focus:border-sky-400 focus:border-2 input-form input"
+                    className="h-8 w-1/2 text-lg input-form input"
                 >
                     {options.map((option) => {
                         return <option key={option}>{option}</option>
@@ -80,13 +80,10 @@ const Form = ({ func, data, options }: Props) => {
                 onChange={(event) => setComment(event.target.value)}
                 value={comment}
                 name="comment"
-                className="h-12 input-form focus:border-sky-400 focus:border-2"
+                className="h-12 input-form"
                 placeholder="Комментарий"
             ></textarea>
-            <button
-                type="submit"
-                className=" hover:bg-gray-100 hover:text-sky-500 hover:border-sky-500 form-button"
-            >
+            <button type="submit" className="form-button">
                 Добавить
             </button>
         </form>

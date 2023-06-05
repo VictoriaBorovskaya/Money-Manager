@@ -1,14 +1,14 @@
+import cn from "classnames"
 import { PurchaseType } from "../Form"
 import "./ElementCard.css"
 
 type Props = {
-    data: PurchaseType[],
-    dataElem: PurchaseType,
-    func: (data: PurchaseType[]) => void,
+    data: PurchaseType[]
+    dataElem: PurchaseType
+    func: (data: PurchaseType[]) => void
 }
 
 const ElementCard = ({ data, dataElem, func }: Props) => {
-
     const handleChange = (id: string) => {
         func(
             data.map((elem) => {
@@ -23,9 +23,10 @@ const ElementCard = ({ data, dataElem, func }: Props) => {
     return (
         <div>
             <div
-                className={dataElem.isChecked === false
-                    ? "card"
-                    : "card bg-gray-200"}
+                className={cn("card", {
+                    "bg-gray-200": dataElem.isChecked === true,
+                    "bg-transparent": dataElem.isChecked === false
+                })}
             >
                 <div className="flex justify-between items-center w-full">
                     <div className="flex flex-col w-full text-neutral-800">
@@ -37,8 +38,8 @@ const ElementCard = ({ data, dataElem, func }: Props) => {
                                 type="checkbox"
                                 className="mr-2 cursor-pointer"
                                 checked={dataElem.isChecked}
-                                onChange={() => handleChange(dataElem.id)}>
-                            </input>
+                                onChange={() => handleChange(dataElem.id)}
+                            ></input>
                             <p className="py-1 pl-1">{dataElem.category}</p>
                         </div>
                         <p className="text-sm pl-1 pr-2 text-gray-600">
@@ -51,7 +52,6 @@ const ElementCard = ({ data, dataElem, func }: Props) => {
                 </div>
             </div>
         </div>
-
     )
 }
 

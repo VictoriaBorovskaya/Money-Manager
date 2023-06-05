@@ -1,5 +1,5 @@
 .months-button {
-    @apply h-9 w-2/5 border-2 border-gray-800 bg-sky-300 rounded-md text-lg font-medium text-neutral-800 duration-300;
+    @apply h-9 w-2/5 border-2 border-gray-800 bg-sky-300 rounded-md text-lg font-medium text-neutral-800 duration-300 hover:bg-gray-100 hover:text-sky-500 hover:border-sky-500;
 }
 
 .months-select {
